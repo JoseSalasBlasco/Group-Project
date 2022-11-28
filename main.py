@@ -73,7 +73,7 @@ def winner_of_race(id, time_taken):
 
 
 def display_races(id, time_taken, venue, fastest_runner):
-    MINUTE = 50
+    MINUTE = 60
     venue = venue.split(",")
     venue = venue[0]
     print(f"Results for {venue}:")
@@ -85,7 +85,13 @@ def display_races(id, time_taken, venue, fastest_runner):
         seconds.append(time_taken[i] % MINUTE)
     for i in range(len(id)):
         print(f"{id[i]:<10s} {minutes[i]} minutes and {seconds[i]} seconds")
-    print(f"{fastest_runner} won the race.")
+
+    sorted_list = time_taken.copy()
+    sorted_list.sort()
+    winner = id[time_taken.index(sorted_list[0])]
+    second = id[time_taken.index(sorted_list[1])]
+    third = id[time_taken.index(sorted_list[2])]
+    print(f"Race winner: {winner}\nSecond place: {second}\nThird place: {third}")
 
 
 def users_venue(races_location, runners_id):
