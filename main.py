@@ -56,7 +56,10 @@ def race_venues():
         lines = input.readlines()
     races_location = []
     for line in lines:
-        races_location.append(line.strip("\n"))
+        split_line = line.split(",")
+        location = split_line[0].strip("\n")
+        if location not in (races_location):
+            races_location.append(location)
     return races_location
 
 
@@ -69,8 +72,8 @@ def winner_of_race(id, time_taken):
     return winner
 
 
-def display_races(id, time_taken, venue, fastest_runner):
-    MINUTE = 50
+def display_races(id, time_taken, venue):
+    MINUTE = 60
     venue = venue.split(",")
     venue = venue[0]
     print(f"Results for {venue}:")
@@ -82,7 +85,13 @@ def display_races(id, time_taken, venue, fastest_runner):
         seconds.append(time_taken[i] % MINUTE)
     for i in range(len(id)):
         print(f"{id[i]:<10s} {minutes[i]} minutes and {seconds[i]} seconds")
-    print(f"{fastest_runner} won the race.")
+
+    sorted_list = time_taken.copy()
+    sorted_list.sort()
+    winner = id[time_taken.index(sorted_list[0])]
+    second = id[time_taken.index(sorted_list[1])]
+    third = id[time_taken.index(sorted_list[2])]
+    print(f"Race winner: {winner}\nSecond place: {second}\nThird place: {third}")
 
 
 def users_venue(races_location, runners_id):
