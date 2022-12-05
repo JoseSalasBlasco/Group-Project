@@ -99,12 +99,7 @@ def display_races(id, time_taken, venue):
         seconds.append(time_taken[i] % MINUTE)
     for i in range(len(id)):
         print(f"{id[i]:<10s} {minutes[i]} minutes and {seconds[i]} seconds")
-
-  sorted_list = time_taken.copy()
-    sorted_list.sort()
-    winner, second, third = id[time_taken.index(sorted_list[0])], id[time_taken.index(sorted_list[1])], id[time_taken.index(sorted_list[2])]
-    print(f"Race winner: {winner}\nSecond place: {second}\nThird place: {third}")
-    
+        
     
  def show_podium(id, time_taken, venue):
     sorted_list = time_taken.copy()
