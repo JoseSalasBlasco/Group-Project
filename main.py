@@ -260,10 +260,10 @@ def main():
     runners_name, runners_id = runners_data()
     MENU = "1. Show the results for a race \n2. Add results for a race \n3. Show all competitors by county " \
            "\n4. Show the winner of each race \n5. Show all the race times for one competitor " \
-           "\n6. Show all competitors who have won a race \n7. Quit \n>>> "
-    input_menu = read_integer_between_numbers(MENU, 1, 7)
+           "\n6. Show all competitors who have won a race \n7. Show all competitors who have not taken a podium-position in any race\n8. Quit \n>>> "
+    input_menu = read_integer_between_numbers(MENU, 1, 8)
 
-    while input_menu != 7:
+    while input_menu != 8:
         if input_menu == 1:
             print("(1) Show the results for a race \n===============================")
             id, time_taken, venue = race_results(races_location)
@@ -281,8 +281,10 @@ def main():
             displaying_race_times_one_competitor(races_location, runner, id)
         elif input_menu == 6:
             displaying_runners_who_have_won_at_least_one_race(races_location, runners_name, runners_id)
+        elif input_menu == 7:
+            print()
         print()
-        input_menu = read_integer_between_numbers(MENU, 1, 7)
+        input_menu = read_integer_between_numbers(MENU, 1, 8)
     updating_races_file(races_location)
 
 
