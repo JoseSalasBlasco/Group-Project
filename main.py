@@ -248,7 +248,7 @@ def main():
             print("(1) Show the results for a race \n===============================")
             id, time_taken, venue = race_results(races_location)
             fastest_runner = winner_of_race(id, time_taken)
-            display_races(id, time_taken, venue, fastest_runner)
+            display_races(id, time_taken, venue)
         elif input_menu == 2:
             print(f"Runners List: {runners_name}")
             users_venue(races_location, runners_id)
