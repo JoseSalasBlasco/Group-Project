@@ -270,15 +270,17 @@ def displaying_runners_who_have_won_at_least_one_race(races_location, runners_na
     print(f"-" * 55)
     winners = []
     runners = []
-    for i, location in enumerate(races_location):
-        id, time_taken = reading_race_results(location)
+    for i in range(len(races_location)):
+        id, time_taken = reading_race_results(races_location[i])
         fastest_runner = winner_of_race(id, time_taken)
-        name_of_runner = finding_name_of_winner(fastest_runner, runners_id, runners_name)
-        if fastest_runner not in winners:
-            winners.append(fastest_runner)
-            runners.append(name_of_runner)
-    for i, fastest_runner in enumerate(winners):
-        print(f"{runners[i]} ({fastest_runner})")
+        winners.append(fastest_runner)
+    list(set(winners))
+    for i in winners:
+        for j in range(len(runners_id)):
+            if runners_id[j] == i:
+                runners.append(runners_name[j])
+    print(winners)
+    print(runners)
 
 
 def main():
