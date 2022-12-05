@@ -100,12 +100,19 @@ def display_races(id, time_taken, venue):
     for i in range(len(id)):
         print(f"{id[i]:<10s} {minutes[i]} minutes and {seconds[i]} seconds")
 
+  sorted_list = time_taken.copy()
+    sorted_list.sort()
+    winner, second, third = id[time_taken.index(sorted_list[0])], id[time_taken.index(sorted_list[1])], id[time_taken.index(sorted_list[2])]
+    print(f"Race winner: {winner}\nSecond place: {second}\nThird place: {third}")
+    
+    
+ def show_podium(id, time_taken, venue):
     sorted_list = time_taken.copy()
     sorted_list.sort()
-    winner = id[time_taken.index(sorted_list[0])]
-    second = id[time_taken.index(sorted_list[1])]
-    third = id[time_taken.index(sorted_list[2])]
+    winner, second, third = id[time_taken.index(sorted_list[0])], id[time_taken.index(sorted_list[1])], id[
+        time_taken.index(sorted_list[2])]
     print(f"Race winner: {winner}\nSecond place: {second}\nThird place: {third}")
+    return winner, second, third
 
 
 def users_venue(races_location, runners_id):
@@ -282,6 +289,8 @@ def main():
         elif input_menu == 6:
             displaying_runners_who_have_won_at_least_one_race(races_location, runners_name, runners_id)
         elif input_menu == 7:
+            id, time_taken, venue = race_results(races_location)
+            show_podium(id, time_taken, venue)
             print()
         print()
         input_menu = read_integer_between_numbers(MENU, 1, 8)
