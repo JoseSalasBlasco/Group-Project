@@ -101,13 +101,37 @@ def display_races(id, time_taken, venue):
         print(f"{id[i]:<10s} {minutes[i]} minutes and {seconds[i]} seconds")
         
     
- def show_podium(id, time_taken, venue):
+ def show_podium(id, time_taken):
     sorted_list = time_taken.copy()
     sorted_list.sort()
     winner, second, third = id[time_taken.index(sorted_list[0])], id[time_taken.index(sorted_list[1])], id[
         time_taken.index(sorted_list[2])]
     print(f"Race winner: {winner}\nSecond place: {second}\nThird place: {third}")
-    return winner, second, third
+
+
+def return_podium(id, time_taken):
+    sorted_list = time_taken.copy()
+    sorted_list.sort()
+    podiumers = []
+    winner, second, third = id[time_taken.index(sorted_list[0])], id[time_taken.index(sorted_list[1])], id[
+        time_taken.index(sorted_list[2])]
+    podiumers.append(winner)
+    podiumers.append(second)
+    podiumers.append(third)
+    return podiumers
+
+
+def not_podium(races_location):
+    runners_name, runners_id = runners_data()
+
+    for i in range(len(races_location)):
+        id, time_taken = reading_race_results(races_location[i])
+        podium = return_podium(id, time_taken)
+        for runner in podium:
+            if runner in runners_id:
+                runners_id.remove(runner)
+
+    return runners_id
 
 
 def users_venue(races_location, runners_id):
@@ -284,9 +308,8 @@ def main():
         elif input_menu == 6:
             displaying_runners_who_have_won_at_least_one_race(races_location, runners_name, runners_id)
         elif input_menu == 7:
-            id, time_taken, venue = race_results(races_location)
-            show_podium(id, time_taken, venue)
-            print()
+            users = not_podium(races_location)
+            print(users)
         print()
         input_menu = read_integer_between_numbers(MENU, 1, 8)
     updating_races_file(races_location)
