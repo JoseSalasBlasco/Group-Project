@@ -42,6 +42,20 @@ def runners_data():
     return runners_name, runners_id
 
 
+def reading_race_results(location):
+    location = location.split(",")
+    location = location[0]
+    with open(f"{location}.txt") as input_type:
+        lines = input_type.readlines()
+    id = []
+    time_taken = []
+    for line in lines:
+        split_line = line.split(",".strip("\n"))
+        id.append(split_line[0])
+        time_taken.append(int(split_line[1].strip("\n")))
+    return id, time_taken
+
+
 def race_results(races_location):
     for i in range(len(races_location)):
         print(f"{i + 1}: {races_location[i].strip(',')}")
@@ -130,20 +144,6 @@ def competitors_by_county(name, id):
     for i in range(len(name)):
         if id[i].startswith("KY"):
             print(f"{name[i]} ({id[i]})")
-
-
-def reading_race_results(location):
-    location = location.split(",")
-    location = location[0]
-    with open(f"{location}.txt") as input_type:
-        lines = input_type.readlines()
-    id = []
-    time_taken = []
-    for line in lines:
-        split_line = line.split(",".strip("\n"))
-        id.append(split_line[0])
-        time_taken.append(int(split_line[1].strip("\n")))
-    return id, time_taken
 
 
 def reading_race_results_of_relevant_runner(location, runner_id):
